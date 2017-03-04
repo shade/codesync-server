@@ -1,0 +1,20 @@
+{
+  "name": "codesync-server",
+  "version": "1.0.0",
+  "description": "The CodeSync Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe-tom/codesync-server.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joe-tom/codesync-server/issues"
+  },
+  "homepage": "https://github.com/joe-tom/codesync-server#readme"
+}
