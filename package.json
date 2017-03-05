@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/joe-tom/codesync-server/issues"
   },
-  "homepage": "https://github.com/joe-tom/codesync-server#readme"
+  "homepage": "https://github.com/joe-tom/codesync-server#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "hapi": "^16.1.0"
+  }
 }

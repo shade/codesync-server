@@ -1,5 +1,5 @@
 
-# CodeSync Server
+# CodeSync API Server
 ## The server for codesync
 We should consider changing the name.
 
