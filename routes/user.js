@@ -63,7 +63,8 @@ var signupRoute = (request, reply) => {
     username,
     password,
     email
-  }
+  } = request.payload
+  
 }
 
 

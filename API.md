@@ -21,6 +21,23 @@ This is the documentation for the API. All API requests must be made to
 > }
 > ```
 
+### POST user/signup
+> ####Description
+> Creates a user and adds them to the Database, if their username and email are unique.
+>
+> ####POST params
+> _username_ - the current user's username.
+> _password_ - the current user's password.
+> _email_ - the user's email.
+>
+> ####Returns
+> ```json
+> {
+>   "token": "THE_USER_TOKEN",
+>   "expires": Number
+> }
+> ```
+
 ## WebSocket Endpoints
 
 ### 'auth'
