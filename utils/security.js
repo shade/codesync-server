@@ -22,7 +22,7 @@ function compare (plainPass, hashPass) {
 
 // Function to create a token from some information.
 function tokenify (data) {
-  return crypto.createHmac('sha256', API_HMAC_KEY).update(data).digest('hex')
+  return Crypto.createHmac('sha256', API_HMAC_KEY).update(data).digest('base64')
 }
 
 

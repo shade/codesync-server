@@ -1,13 +1,17 @@
+
 const WebSocket = require('ws')
+const Security = require('../utils/security')
 
 // Declare some constants.
 const TERMINATE_INTERVAL_LENGTH = 60000
 const WEBSOCKET_DELIMETER = ':|:'
 
+global.SocketServer = null
+
+
 
 // Object to hold all the events.
 Events = {}
-
 
 
 Events.auth = (data, socket) => {
@@ -18,6 +22,43 @@ Events.list = (data, socket) => {
 
 }
 
+Events.send = (data, socket) => {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -27,7 +68,11 @@ function main () {
   // Declare the server, globally.
   global.SocketServer = new WebSocket.Server({ 
     port: 5001,
-    host: 'localhost'
+    host: 'localhost',
+    verifyClient: (info) => {
+      console.log(Security.tokenify(info.req.url))
+      return true
+    }
   })
 
   // Set the server events.
@@ -35,10 +80,10 @@ function main () {
 
     // Do stuff on the messages.
     socket.on('message', (data, flags) => {
-      
+
       // These are the conditions to kill it.
       if (flags.binary || (data.indexOf(WEBSOCKET_DELIMETER) == -1)) return
-        
+
       // Grab the necessary event data and stuff.
       var msgArr = data.split(WEBSOCKET_DELIMETER)
       var event = msgArr[0]
