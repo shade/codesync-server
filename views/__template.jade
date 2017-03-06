@@ -1,0 +1,17 @@
+html
+  head
+    link(rel="stylesheet" href="/static/css/__auth.css")
+  body
+    div.center__wrap.center__wrap--header
+      div.header
+        block Header
+          | Login
+    div.center__wrap.center__wrap--input
+      div.input__wrap
+        form
+          input.cool__input(placeholder="Username or Email")
+          input.cool__input(placeholder="Password" type="password")
+          div.cool__buttonWrap
+            div.cool__button
+            div.cool__label Remember Me
+          input.cool__input.cool__input--submit(placeholder="Login" type="submit")

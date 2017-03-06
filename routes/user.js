@@ -48,7 +48,7 @@ var authRoute = (request, reply) => {
       })
     } else {
       reply({
-        token: Token.generate(res[0], TOKEN_EXPIRY_TIME)
+        token: Token.generate(res[0], TOKEN_EXPIRY_TIME),
         expiry: TOKEN_EXPIRY_TIME + Date.now()
       })
     }
@@ -64,7 +64,7 @@ var signupRoute = (request, reply) => {
     password,
     email
   } = request.payload
-  
+
 }
 
 
@@ -87,7 +87,13 @@ var Routes = []
  */
 Routes.push({
   method: 'POST',
-  path: '/auth',
+  path: '/user/auth',
+  handler: authRoute
+})
+
+Routes.push({
+  method: 'POST',
+  path: '/user/signup',
   handler: authRoute
 })
 

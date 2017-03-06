@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+/** Styling for page structure. */
+.center__wrap{
+  width: 100%;
+  text-align: center;
+  margin-top: 100px;
+}
+
+/** Styling for the thing and text at the top. */
+  .header{
+    width: 450px;
+    font-family: Nunito;
+    font-size: 30px;
+    font-weight: 400;
+    margin: auto;
+    text-align: left;
+  }
+
+/** Styling for the main body and all the inputs. */
+  .input__wrap{
+    width: 300px;
+    font-family: Nunito;
+    font-size: 30px;
+    font-weight: 400;
+    margin: auto;
+    text-align: center;
+  }
+    .cool__input{
+      font-family: Inconsolata;
+      font-size: 14px;
+      padding: 10px;
+      border: 0;
+      border-bottom: 1px solid #EEE;
+      outline: 0;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 30px;
+    }
+      .cool__input--submit{
+        width: 50%;
+        padding: 15px;
+        background-color: #222;
+        color: #FFF;
+        margin: auto;
+        margin-top: 50px;
+        cursor: pointer;
+        border: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: box-shadow .25s;
+      }
+      .cool__input--submit:hover{
+        box-shadow: 0px 0px 10px #666;
+        transition: box-shadow .25s;
+      }
+
+    /** Styling for that button */
+    .cool__buttonWrap{
+      width: 100%;
+      margin-top: 30px;
+    }
+    .cool__button{
+      height: 15px;
+      width: 15px;
+      box-shadow: 0px 1px 1px #999;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .cool__label{
+      display: inline-block;
+      font-size: 13px;
+      font-family: Inconsolata;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #444;
+      line-height: -20px;
+      margin-left: 10px;
+      cursor: pointer;
+      height: 20px;
+    }
