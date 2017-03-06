@@ -2,7 +2,6 @@
 const Inert = require('inert')
 const Vision = require('vision')
 const Jade = require('jade')
-const WebSocket = require('ws')
 const Hapi = require('hapi')
 
 // Start the server.
