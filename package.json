@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/joe-tom/codesync-server#readme",
   "dependencies": {
+    "async": "^2.1.5",
     "bcrypt": "^1.0.2",
-    "hapi": "^16.1.0"
+    "hapi": "^16.1.0",
+    "monk": "^4.0.0",
+    "ws": "^2.2.0"
   }
 }

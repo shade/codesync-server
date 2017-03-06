@@ -1,5 +1,7 @@
-const Hapi = require('hapi');
+const WebSocket = require('ws')
+const Hapi = require('hapi')
 const Server = new Hapi.Server()
+const Socket = require('./routes/socket')
 
 // Create a server and set up the connection.
 Server.connection({
@@ -7,13 +9,16 @@ Server.connection({
   port: 5000
 })
 
-var Routes = [
-  './routes/user',
-]
+// Declare some globals.
+global.SocketServer = new WebSocket.Server({ port: 5001 })
+global.DB = require('monk')('localhost:27017/codesync')
+
+// Declare constants.
+const ROUTES = [ './routes/user' ]
 
 
 // Go through all the routes packages, and set up the hapi endpoints.
-Routes.forEach((uri) => {
+ROUTES.forEach((uri) => {
   var thing = require(uri)
 
   thing.forEach((route) => {
@@ -21,6 +26,9 @@ Routes.forEach((uri) => {
   })
 })
 
+
+// Start the socket server.
+Socket.start()
 
 // Start the server.
 Server.start((err) => {
