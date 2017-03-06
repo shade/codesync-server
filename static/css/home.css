@@ -76,8 +76,7 @@ body{
   z-index: -1;
 }
   #background__image--img{
-    background: url(/static/img/hero.jpg);
-    background-size: 1500px;
+    background: rgba(0,0,0,0.2);
   }
   #background__image--dots{
     background: url(/static/img/dots.png) rgba(255,255,255,0.8);
