@@ -1,16 +1,4 @@
 
-
-
-
-
-var homeView = (request, reply) => {
-  reply.view('home', {})
-}
-var loginView = (request, reply) => {
-  reply.view('login', {})
-}
-
-
 //////////////////////
 // SETUP THE ROUTES //
 //////////////////////
@@ -20,12 +8,17 @@ var Routes = []
 Routes.push({
   method: 'GET',
   path: '/',
-  handler: homeView
+  handler: (request, reply) => (reply.view('home', {}))
 })
 Routes.push({
   method: 'GET',
   path: '/login',
-  handler: loginView,
+  handler: (request, reply) => (reply.view('auth/login', {}))
+})
+Routes.push({
+  method: 'GET',
+  path: '/email',
+  handler: (request, reply) => (reply.view('auth/email', {}))
 })
 
 // Handle static files. CSS JS and IMGS.

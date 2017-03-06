@@ -16,7 +16,6 @@ Server.connection({
 })
 
 // Declare some globals.
-global.SocketServer = new WebSocket.Server({ port: 5001 })
 global.DB = require('monk')('localhost:27017/codesync')
 
 // Declare constants.

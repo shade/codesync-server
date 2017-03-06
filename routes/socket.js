@@ -1,23 +1,49 @@
 
+
+const WEBSOCKET_DELIMETER = ':|:'
+
+
+
+
 // Object to hold all the events.
 Events = {}
 
 
-Events.getList = (data) => {
+
+Events.auth = (data, socket) => {
+  
+}
+
+Events.list = (data, socket) => {
   
 }
 
 
 
 
-
-
-
+/** Starts the socket server */
 function main () {
-  SocketServer.on('connection', (socket) => {
-    for (var event in Events) {
-      socket.on(event, Events[event].bind(socket))
-    }
+
+  // Declare the server, globally.
+  global.SocketServer = new WebSocket.Server({ port: 5001 })
+
+  // Set the server events.
+  SocketServer.on('connection', socket => {
+
+    // Do stuff on the messages.
+    socket.on('message', (data, flags) => {
+      
+      // These are the conditions to kill it.
+      if (flags.binary || data.indexOf(WEBSOCKET_DELIMETER) != 1) return
+
+      // Grab the necessary event data and stuff.
+      var msgArr = data.split(WEBSOCKET_DELIMETER)
+      var event = msgArr[0]
+
+      // Execute the Events.
+      Events[event] && Events[event](msgArr[1], socket)
+    })
+
   })
 }
 

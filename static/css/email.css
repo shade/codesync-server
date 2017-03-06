@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+body {
+  background: url(/static/img/dots.png) rgba(0,0,0,0.1);
+  background-size: 120px;
+}
+  #header {
+    width: 90%;
+    height: 80px;
+    font-family: Quicksand;
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 100px;
+    margin-left: 5%;
+    text-align: center;
+  }
