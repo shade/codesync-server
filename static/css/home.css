@@ -62,3 +62,24 @@ body{
     outline: 0;
     width: 100px;
   }
+
+
+
+
+.background__image{
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  margin-left: -600px;
+  height: 100%;
+  width: 1200px;
+  z-index: -1;
+}
+  #background__image--img{
+    background: url(/static/img/hero.jpg);
+    background-size: 1500px;
+  }
+  #background__image--dots{
+    background: url(/static/img/dots.png) rgba(255,255,255,0.8);
+    background-size: 50px;
+  }
