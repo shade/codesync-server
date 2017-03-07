@@ -54,3 +54,13 @@ Additionally, all WebSocket requests must be accompanied by a valid token in the
 >
 > #### Callback Events
 > none.
+
+### 'list'
+> #### Description
+> This gets the list of all the users in the repo.
+> #### JSON Params
+> _to_ - the id of the person you're sending data to.
+> _data_ - some sort of data you want to send them.
+>
+> #### Callback Events
+> none.

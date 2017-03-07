@@ -1,3 +1,4 @@
+const Redis = require('redis')
 const Url = require('url')
 const WebSocket = require('ws')
 const Security = require('../utils/security')
@@ -7,7 +8,7 @@ const TERMINATE_INTERVAL_LENGTH = 60000
 const WEBSOCKET_DELIMETER = ':|:'
 
 global.SocketServer = null
-
+global.RedisClient = Redis.createClient()
 
 
 // Object to hold all the events.
@@ -15,12 +16,46 @@ var Users = {}
 var Events = {}
 
 
+/**
+ * Accepts a repo ID and sends back a list of people in the repo, if legit repo
+ * @param  {JSON} data   {
+ *                         repo: 'REPO_ID'
+ *                       }
+ *
+ * @return {Array<USER_ID>} data[]
+ */
 Events.list = (data, socket) => {
 
+  // Make sure this is valid JSON, or fail.
+  try {
+    var {repo} = JSON.parse(data)
+  } catch (e) {
+    logError(socket, 'bad JSON')
+    return
+  }
+  var you_id = socket.id
+
+  // Grab the userlist.
+  RedisClient.lrange(`${repo}list`,0,-1, (err, result) => {
+      if (err) logError(socket, 'redis DB error..')
+
+
+      // Make sure you're already not part of the user list, or die.
+      for (var i = 0, ii = result.length; i < ii; i++) {
+        if (you_id == result[i]) {
+          logError(socket, 'You\'re already on list')
+          return
+        }
+      }
+      // Send the user list to you.
+      emitData(socket,'list',result)
+      // Add you to the userlist.
+      RedisClient.rpush(`${repo}list`,`${you_id}`, () => ())
+
+    }
+  }) 
+
 }
-
-
-
 
 
 /**
@@ -55,21 +90,22 @@ Events.send = (data, socket) => {
   }
 
   // Send to the socket, with data and sender.
-  toSocket.send({
+  emitData(toSocket, 'data', JSON.stringify({
     from: socket.id,
     data: data
-  })
+  }))
 }
 
 
 
 
 
-
-
-
-
-
+function legoError (socket, msg) {
+  socket.send('error'+WEBSOCKET_DELIMETER+msg)
+}
+function emitData  (socket, event, data) {
+  socket.send(event + JSON.stringify(data))
+}
 
 
 
@@ -91,8 +127,9 @@ function main () {
   // Set the server events.
   SocketServer.on('connection', socket => {
     // Add the socket to the users list.
-    Users[] = socket
-
+    Users[Security.tokenify(socket.upgradeReq.url)] = socket
+    socket.id = Security.tokenify(socket.upgradeReq.url)
+    
     // Do stuff on the messages.
     socket.on('message', (data, flags) => {
 
@@ -106,14 +143,7 @@ function main () {
       // Execute the Events.
       Events[event] && Events[event](msgArr[1], socket)
     })
-
   })
-
-
-  global.terminateInterval = setInterval(() => {
-
-  }, TERMINATE_INTERVAL_LENGTH)
-
 }
 
 
