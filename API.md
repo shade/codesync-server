@@ -45,10 +45,12 @@ Where data is a JSON stringified message. The Delimeter can be found as a consta
 
 Additionally, all WebSocket requests must be accompanied by a valid token in the token GET parameter.
 
-### 'list'
+### 'send'
 > #### Description
-> This event is used to let the server know that you are a valid user. If this is not verified within 60s of joining, the server will forcefully close the socket.
+> This event sends data to the the 
 > #### JSON Params
-> _token_ - The token that you get from the HTTP server.
+> _to_ - the id of the person you're sending data to.
+> _data_ - some sort of data you want to send them.
+>
 > #### Callback Events
 > none.

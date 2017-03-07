@@ -11,15 +11,54 @@ global.SocketServer = null
 
 
 // Object to hold all the events.
-Events = {}
+var Users = {}
+var Events = {}
 
 
 Events.list = (data, socket) => {
 
 }
 
+
+
+
+
+/**
+ * Accepts some data and sends it to the person.
+ * With the current socket data.
+ * 
+ * @param  {JSON} data {
+ *                       to: 'USER_ID',
+ *                       data: 'String data'
+ *                     }
+ *
+ * @return {JSON} data {
+ *                       from: 'USER_ID',
+ *                       data: 'String data'
+ *                     }
+ */
 Events.send = (data, socket) => {
 
+  // Make sure this is valid JSON, or fail.
+  try {
+    var {to, data} = JSON.parse(data)
+  } catch (e) {
+    logError(socket, 'bad JSON')
+    return
+  }
+
+  // Find the reciever or fail.
+  var toSocket = Users[to]
+  if (!toSocket) {
+    logError(socket, 'bad User')
+    return
+  }
+
+  // Send to the socket, with data and sender.
+  toSocket.send({
+    from: socket.id,
+    data: data
+  })
 }
 
 
@@ -51,6 +90,8 @@ function main () {
 
   // Set the server events.
   SocketServer.on('connection', socket => {
+    // Add the socket to the users list.
+    Users[] = socket
 
     // Do stuff on the messages.
     socket.on('message', (data, flags) => {
