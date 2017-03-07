@@ -1,4 +1,4 @@
-
+const Url = require('url')
 const WebSocket = require('ws')
 const Security = require('../utils/security')
 
@@ -14,10 +14,6 @@ global.SocketServer = null
 Events = {}
 
 
-Events.auth = (data, socket) => {
-  console.log('Auth!')
-}
-
 Events.list = (data, socket) => {
 
 }
@@ -25,28 +21,6 @@ Events.list = (data, socket) => {
 Events.send = (data, socket) => {
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

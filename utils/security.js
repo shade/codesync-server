@@ -25,6 +25,11 @@ function tokenify (data) {
   return Crypto.createHmac('sha256', API_HMAC_KEY).update(data).digest('base64')
 }
 
+// Check to see if this token is valid
+function validToken (token) {
+  return Crypto.createHmac('sha256', API_HMAC_KEY).update(data).digest('base64')
+}
+
 
 
 module.exports = {
@@ -32,4 +37,3 @@ module.exports = {
   compare: compare,
   tokenify: tokenify
 }
-

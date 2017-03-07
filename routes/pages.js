@@ -20,6 +20,11 @@ Routes.push({
   path: '/email',
   handler: (request, reply) => (reply.view('auth/email', {}))
 })
+Routes.push({
+  method: 'GET',
+  path: '/signup',
+  handler: (request, reply) => (reply.view('auth/signup', {}))
+})
 
 // Handle static files. CSS JS and IMGS.
 Routes.push({  

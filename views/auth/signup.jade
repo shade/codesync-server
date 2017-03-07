@@ -1,1 +1,11 @@
 extends __template
+
+block Header
+  | Signup
+  
+block Body
+  form
+    input.cool__input(placeholder="Username")
+    input.cool__input(placeholder="Email or Phone")
+    input.cool__input(placeholder="Password" type="password")
+    input.cool__input.cool__input--submit(placeholder="Login" type="submit")
