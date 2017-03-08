@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 body{
-  background-color: rgba(0,0,0,0.02);
+  background-color: rgba(0,0,0,0.05);
 }
 
 /** Styling for page structuring. */
@@ -12,16 +14,54 @@ body{
   padding: 50px;
   box-sizing: border-box;
 }
+  /** Styling for the space card and its innards. */
   .space__card{
     height: 150px;
     width: 241px;
-    box-shadow: 0px 1px 3px #BBB;
+    box-shadow: 0px 1px 1px #DDD;
+    border-radius: 3px;
+    overflow: hidden;
     background-color: #FFF;
     margin: 10px 5px;
     display: inline-block;
+    padding: 7.5px;
+    position: relative;
   }
     .space__bar{
+      position: absolute;
+      top: 0px;
+      left: 0px;
       height: 5px;
       width: 100%;
-      background: url(/static/img/galaxy.jpg) center center no-repeat;
+      background: url(/static/img/galaxy.jpg) center right no-repeat;
     }
+    .space__name{
+      font-family: Quicksand;
+      font-weight: 600;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    .space__edited{
+      font-family: Quicksand;
+      font-weight: 300;
+      font-size: 11px;
+      color: #999;
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    /** Styling just for the collaborator space. */
+    .space__collabWrap{
+      width: 100%;
+      margin-top: 20px;
+      border-top: 1px solid #EEE;
+    }
+      .space__collabHeader{
+        font-family: Quicksand;
+        font-size: 10px;
+        width: 100%;
+        font-weight: 600;
+        color: #6C7A89;
+        padding-top: 5px;
+        letter-spacing: 1px;
+      }
