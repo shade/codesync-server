@@ -1,7 +1,8 @@
 
 // Declare the packages.
 const Async = require('async')
-const Validator = require("email-validator");
+const Validator = require('email-validator');
+const Yar = require('yar')
 
 const DB = require('../../utils/db')
 const Security = require('../../utils/security')
@@ -97,7 +98,7 @@ var signupRoute = (request, reply) => {
       {email: email},
       {username: username}
     ]
-  }, (err, result) => {
+  }, {}, (err, result) => {
 
     // If we found a match, tell em.
     if (result.length != 0) {
@@ -117,7 +118,27 @@ var signupRoute = (request, reply) => {
 
 
 
+// This handles all the /login requests.
+var loginRoute = (request, reply) => {
+  // Grab the variables from the post request.
+  // The user can login with the email or the username.
+  var {
+    username_email,
+    password
+  } = request.payload
 
+  username_email = username_email.toLowerCase()
+
+  // Check this username/email's existence in the database.
+  DB.find({
+    $or: [
+      {email: username_email},
+      {username: username_email}
+    ]
+  }, {}, (err, result) => {
+
+  })
+}
 
 
 
@@ -130,9 +151,6 @@ var signupRoute = (request, reply) => {
 
 var Routes = []
 
-/**
- * `auth` - returns the token based on username and password. Also stores ide.
- */
 Routes.push({
   method: 'POST',
   path: API_PREFIX+'/user/auth',
@@ -143,6 +161,12 @@ Routes.push({
   method: 'POST',
   path: API_PREFIX+'/user/signup',
   handler: signupRoute
+})
+
+Routes.push({
+  method: 'POST',
+  path: API_PREFIX+'/user/login',
+  handler: loginRoute
 })
 
 

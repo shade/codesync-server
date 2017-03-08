@@ -1,0 +1,33 @@
+extends __template
+
+block Head
+  link(rel="stylesheet" href="/static/css/user/repo.css")
+
+block Body
+  #main__wrap
+    div.space__headerBar
+    div.space__titleWrap
+      div(contenteditable="true").space__title Unnamed Space
+    div.space__edit Last Edited, 17 mins ago
+    div.space__share Share this link with friends! : #[strong#space__link codesync.com/s/293urji]
+    div.space__link LINK TO GIT PROJECT
+    div.space__readmeWrap(style="visibility: hidden").
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada efficitur nisi vel eleifend. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc scelerisque sem vitae purus rhoncus, ac molestie enim scelerisque. Sed non maximus risus. Nullam efficitur mauris id eleifend lacinia. Praesent quis dignissim eros, a auctor libero. Suspendisse finibus sapien erat, sed consequat lorem ornare in. In convallis nulla id facilisis tristique. Nunc condimentum vitae velit eu auctor.
+      #[div.space__readmeBottom show more]
+    div.space__collabWrap
+      strong.space__collabHeader Collaborators
+      div.space__collab
+      div.space__collab
+      div.space__collab
+
+  script.
+    document.getElementById('space__link').addEventListener('click', function (e) {
+    SelectText(e.target)
+    })
+    function SelectText(text) {
+      var selection = window.getSelection();
+      var range = document.createRange();
+      range.selectNodeContents(text);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }

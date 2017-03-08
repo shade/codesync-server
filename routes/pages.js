@@ -5,6 +5,7 @@
 
 var Routes = []
 
+/** Session routes. */
 Routes.push({
   method: 'GET',
   path: '/home',
@@ -15,6 +16,20 @@ Routes.push({
   path: '/r/{repo?}',
   handler: (request, reply) => (reply.view('user/repo', {}))
 })
+
+
+/** Iframe Session routes */
+Routes.push({
+  method: 'GET',
+  path: '/pages/home',
+  handler: (request, reply) => (reply.view('user/pages/home', {}))
+})
+Routes.push({
+  method: 'GET',
+  path: '/pages/r/{repo?}',
+  handler: (request, reply) => (reply.view('user/pages/repo', {}))
+})
+
 
 /** Non session routes. */
 Routes.push({

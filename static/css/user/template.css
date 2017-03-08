@@ -99,3 +99,14 @@ body{
         margin-top: 16px;
         float: right;
       }
+
+/* Styling for the iframe thing. */
+#main__frame{
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 100%;
+  height: calc(100% - 50px);
+  margin: 0;
+  border: 0;
+}
