@@ -1,34 +1,101 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400');
-
-/** Styling for the top navbar */
+@import url('https://fonts.googleapis.com/css?family=NTR');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600');
+body{
+  background-color: rgba(0,0,0,0.05);
+}
+/** Navbar styling. */
 #navbar{
-  width: 100%;
-  height: 50px;
   position: absolute;
   top: 0px;
   left: 0px;
-  box-shadow: 0px 1px 1px #DDD;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #EEE;
   text-align: center;
   background-color: #FFF;
 }
-  .navbar__inner{
-    max-width: 900px;
-    width: 90%;
+  #navbar__inner{
     margin: auto;
+    width: 90%;
+    max-width: 900px;
+    height: 50px;
+    text-align: left;
   }
-    /** Styling for the logo */
-    .logo__wrap{
-      font-family: Montserrat;
-      font-size: 18px;
-      color: #222;
-      float: left;
-      height: 50px;
-      line-height: 50px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+  
+  /** Loading bar styling. */
+  #loading__bar{
+    background-color: #6C7A89;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    width: 20%;
+    height: 2px;
+  }
+
+  /** Logo Styling. */
+  .navbar__logo{
+    font-family: NTR;
+    font-size: 23px;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+    .navbar__logo--bold{
+      font-weight: 600;
+      color: #999;
+      font-size: 15px;
+      margin-left: 3px;
     }
-      .logo__small{
-        color: #AAA;
-        font-size: 12px;
-        margin-left: 2px;
+
+  /** Styling for the navbar search bar */
+  .navbar__search{
+    padding: 1px 10px;
+    padding-left: 30px;
+    width: 250px;
+    font-family: Source Sans Pro;
+    font-weight: 300;
+    border: 0;
+    border-right: 1px solid #DDD;
+    outline: 0;
+    background: url(/static/img/glass.png) center left no-repeat;
+    background-size: 25px;
+    margin-left: 50px;
+    transition: width .5s;
+  }
+    .navbar__search:focus{
+      width: 300px;
+      transition: width .5s;
+    }
+  /** Stying for the user section. */
+  .user__wrap{
+    float: right;
+    margin-right: 10px;
+  }
+    .user__item{
+      display: inline-block;
+    }
+      .user__item--name{
+        font-family: NTR;
+        font-size: 14px;
+        margin-top: 10px;
+        margin-right: 14px;
+      }
+      .user__item--img{
+        height: 20px;
+        width: 20px;
+        border-radius: 5px;
+        background-color: #DDD;
+        margin-left: 10px;
+        margin-top: 15px;
+        float: right;
+      }
+      .user__item--notify{
+        width: 14px;
+        height: 14px;
+        background: url(/static/img/notification.png) center center no-repeat;
+        background-size: 100%;
+        margin-top: 16px;
+        float: right;
       }

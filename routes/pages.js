@@ -10,6 +10,11 @@ Routes.push({
   path: '/home',
   handler: (request, reply) => (reply.view('user/home', {}))
 })
+Routes.push({
+  method: 'GET',
+  path: '/r/{repo?}',
+  handler: (request, reply) => (reply.view('user/repo', {}))
+})
 
 /** Non session routes. */
 Routes.push({

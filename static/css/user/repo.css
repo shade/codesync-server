@@ -1,0 +1,123 @@
+/** Structure of the main wrap. */
+#main__wrap{
+  width: 80%;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 100px;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 2px #DDD;
+  position: relative;
+  overflow: hidden;
+}
+
+/** Styling for the repo editing */
+  .space__headerBar{
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: url(/static/img/galaxy.jpg) -1000px -500px;
+    top: 0px;
+    left: 0px;
+  }
+  /** Styling for the repo editing header */
+  .space__titleWrap{
+    width: 100%;
+    display: inline-block;
+  }
+    /** The titled input */
+    .space__title{
+      font-family: Inconsolata;
+      font-size: 22px;
+      font-weight: 600;
+      color: #444;
+      padding: 10px;
+      border: 3px solid transparent;
+      border-radius: 5px;
+      outline: 0;
+      min-width: 200px;
+      float: left;
+    }
+      .space__title:focus{
+        border: 3px dashed #DDD;
+      }
+    .space__edit{
+      font-family: NTR;
+      color: #999;
+      font-style: italic;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+    /** That liink and stuff */
+    .space__share{
+      font-size: 13px;
+      font-family: Inconsolata;
+      margin-left: 13px;
+      margin-top: 15px;
+    }
+
+/** Styling for all the things collaborators. */
+.space__collabWrap{
+  font-family: Inconsolata;
+  font-size: 12px;
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px;
+}
+  .space__collabHeader{
+    width: 100%;
+    margin-bottom: 20px;
+    float: left;
+  }
+  .space__collab{
+    height: 70px;
+    width: 70px;
+    background-color: #DDD;
+    border-radius: 50px;
+    float: left;
+    margin: 7px;
+  }
+
+
+/** Styling for the readme wrap. */
+.space__readmeWrap{
+  font-family: Inconsolata;
+  margin-left: 10px;
+  margin-top: 30px;
+  width: 700px;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: justify;
+  z-index: 9;
+  overflow: hidden;
+  font-weight: 300;
+}
+  .space__readmeBottom{
+    width: 100%;
+    box-shadow: 0px -10px 100px #999;
+    height: 30px;
+    z-index: 10;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: Source Sans Pro;
+  }
+
+/** Styling for the link button */
+.space__link{
+  font-family: Inconsolata;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 15px 15px 15px 45px;
+  box-shadow: 0px 1px 3px #CCC;
+  float: left;
+  cursor: pointer;
+  border-radius: 3px;
+  background: url(/static/img/link.svg) center left 10px no-repeat;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  margin: 15px 10px;
+}
