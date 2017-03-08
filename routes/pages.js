@@ -7,6 +7,13 @@ var Routes = []
 
 Routes.push({
   method: 'GET',
+  path: '/home',
+  handler: (request, reply) => (reply.view('user/home', {}))
+})
+
+/** Non session routes. */
+Routes.push({
+  method: 'GET',
   path: '/',
   handler: (request, reply) => (reply.view('home', {}))
 })

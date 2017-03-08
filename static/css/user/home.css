@@ -1,0 +1,27 @@
+body{
+  background-color: rgba(0,0,0,0.02);
+}
+
+/** Styling for page structuring. */
+#main__wrap{
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+  border-top: 3px solid #EEE;
+  margin-top: 100px;
+  padding: 50px;
+  box-sizing: border-box;
+}
+  .space__card{
+    height: 150px;
+    width: 241px;
+    box-shadow: 0px 1px 3px #BBB;
+    background-color: #FFF;
+    margin: 10px 5px;
+    display: inline-block;
+  }
+    .space__bar{
+      height: 5px;
+      width: 100%;
+      background: url(/static/img/galaxy.jpg) center center no-repeat;
+    }

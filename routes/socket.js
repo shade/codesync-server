@@ -50,9 +50,8 @@ Events.list = (data, socket) => {
       // Send the user list to you.
       emitData(socket,'list',result)
       // Add you to the userlist.
-      RedisClient.rpush(`${repo}list`,`${you_id}`, () => ())
+      RedisClient.rpush(`${repo}list`,`${you_id}`, () => {})
 
-    }
   }) 
 
 }
@@ -100,7 +99,7 @@ Events.send = (data, socket) => {
 
 
 
-function legoError (socket, msg) {
+function logError (socket, msg) {
   socket.send('error'+WEBSOCKET_DELIMETER+msg)
 }
 function emitData  (socket, event, data) {
