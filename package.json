@@ -20,6 +20,7 @@
   "dependencies": {
     "async": "^2.1.5",
     "bcrypt": "^1.0.2",
+    "email-validator": "^1.0.7",
     "hapi": "^16.1.0",
     "inert": "^4.1.0",
     "jade": "^1.11.0",

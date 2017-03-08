@@ -11,7 +11,7 @@ body{
   left: 0px;
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid #EEE;
+  box-shadow: 0px 0px 3px #999;
   text-align: center;
   background-color: #FFF;
 }
@@ -46,7 +46,7 @@ body{
       font-weight: 600;
       color: #999;
       font-size: 15px;
-      margin-left: 3px;
+      margin-left: -5px;
     }
 
   /** Styling for the navbar search bar */

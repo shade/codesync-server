@@ -19,7 +19,8 @@ global.DB = require('monk')('localhost:27017/codesync')
 
 // Declare constants.
 const ROUTES = [ 
-  './routes/user', 
+  './routes/api/auth',
+  './routes/api/data',
 ]
 
 

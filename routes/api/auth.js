@@ -1,15 +1,16 @@
 
 // Declare the packages.
 const Async = require('async')
+const Validator = require("email-validator");
 
-const DB = require('../utils/db')
-const Security = require('../utils/security')
+const DB = require('../../utils/db')
+const Security = require('../../utils/security')
 
 
 // Declare the constants.
 // The length of the token. This is: 1 year in ms.
 const TOKEN_EXPIRY_TIME = 3.154e10
-
+const API_PREFIX = '/api/v1'
 
 
 // This handles all /auth token requests.
@@ -64,7 +65,54 @@ var signupRoute = (request, reply) => {
     password,
     email
   } = request.payload
+  var ul = username.length
 
+  username = username.toLowerCase()
+  // Validate the username
+  // 
+  // Usernames must be alphanumerical, may contain dashes.
+  //  Cannot begin or end with one, or contain more than one in a row.
+  //  
+  // Minimum length: 4
+  // Maximum length: 40
+  if (username.match(/([^A-Za-z0-9-]|-{2,})/g) || ul > 40 || ul < 4 || username[0] || username[ul-1] == '-') {
+    reply({
+      error: 'Bad Username'
+    })
+    return
+  }
+
+  // Validate the email.
+  if (!Validator.validate(email)) {
+    reply({
+      error: 'Bad Email'
+    })
+    return
+  }
+
+  // Make sure that both the username
+  // and the email aren't registered in the database already.
+  DB.find({
+    $or:[
+      {email: email},
+      {username: username}
+    ]
+  }, (err, result) => {
+
+    // If we found a match, tell em.
+    if (result.length != 0) {
+      if (result[0].email == email) {
+        reply({
+          error: 'Email Taken'
+        })
+      } else {
+        reply({
+          error: 'Username Taken'
+        })
+      }
+      return
+    }
+  })
 }
 
 
@@ -87,14 +135,14 @@ var Routes = []
  */
 Routes.push({
   method: 'POST',
-  path: '/user/auth',
+  path: API_PREFIX+'/user/auth',
   handler: authRoute
 })
 
 Routes.push({
   method: 'POST',
-  path: '/user/signup',
-  handler: authRoute
+  path: API_PREFIX+'/user/signup',
+  handler: signupRoute
 })
 
 

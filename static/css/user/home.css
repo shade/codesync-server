@@ -5,9 +5,9 @@
   width: 80%;
   max-width: 900px;
   margin: auto;
-  border-top: 3px solid #EEE;
   margin-top: 100px;
   padding: 20px;
+  padding-top: 0;
   box-sizing: border-box;
   text-align: center;
 }
@@ -20,6 +20,8 @@
     width: 100%;
     text-align: left;
     margin-bottom: 30px;
+    border-top: 3px solid #EEE;
+    padding-top: 20px;
   }
   /** Styling for the space card and its innards. */
   .space__card{
