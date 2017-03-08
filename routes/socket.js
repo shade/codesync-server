@@ -98,12 +98,11 @@ Events.send = (data, socket) => {
 
 
 
-
 function logError (socket, msg) {
-  socket.send('error'+WEBSOCKET_DELIMETER+msg)
+  socket.send('error' + WEBSOCKET_DELIMETER + msg)
 }
 function emitData  (socket, event, data) {
-  socket.send(event + JSON.stringify(data))
+  socket.send(event + WEBSOCKET_DELIMETER + JSON.stringify(data))
 }
 
 

@@ -5,7 +5,6 @@ This is the documentation for the API. All API requests must be made to
 ```
 
 ## HTTP Endpoints
-
 ### POST user/auth
 > ####Description
 > Returns a new token for the user to user for websocket connections and other things.
@@ -20,6 +19,20 @@ This is the documentation for the API. All API requests must be made to
 >   "expires": Number
 > }
 > ```
+
+### POST user/login
+> ####Description
+> Similar to user/auth, this registers a token and puts it as the users cookie, essentially creating a session.
+> ####POST params
+> _username_ - the current user's username.
+> _password_ - the current user's password.
+> ####Returns
+> ```json
+> {
+>   "good": "Wonderful, you logged in.",
+> }
+> ```
+
 
 ### POST user/signup
 > ####Description
