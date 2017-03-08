@@ -50,6 +50,7 @@ Additionally, all WebSocket requests must be accompanied by a valid token in the
 > This event sends data to the the 
 > #### JSON Params
 > _to_ - the id of the person you're sending data to.
+>
 > _data_ - some sort of data you want to send them.
 >
 > #### Callback Events
@@ -59,8 +60,7 @@ Additionally, all WebSocket requests must be accompanied by a valid token in the
 > #### Description
 > This gets the list of all the users in the repo.
 > #### JSON Params
-> _to_ - the id of the person you're sending data to.
-> _data_ - some sort of data you want to send them.
+> _repo_ - the id of the repository you want the list of.
 >
 > #### Callback Events
 > none.
