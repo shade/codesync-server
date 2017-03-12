@@ -37,8 +37,9 @@
       border: 3px solid transparent;
       border-radius: 5px;
       outline: 0;
-      min-width: 200px;
       float: left;
+      box-sizing: border-box;
+      width: 100%;
     }
       .space__title:focus{
         border: 3px dashed #DDD;
@@ -59,18 +60,33 @@
     }
 
 /** Styling for all the things collaborators. */
+.space__collabHeader{
+  width: 100%;
+  margin-bottom: 20px;
+  float: left;
+  font-size: 12px;
+  font-family: Inconsolata;
+}
+
+.space__collabInput{
+  width: 80%;
+  border: 0px;
+  box-shadow: 0px 1px 3px #999;
+  border-radius: 4px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-family: Inconsolata;
+  margin-bottom: 10px;
+  outline: 0;
+}
+
 .space__collabWrap{
   font-family: Inconsolata;
   font-size: 12px;
   width: 100%;
-  margin-top: 50px;
   padding: 10px;
 }
-  .space__collabHeader{
-    width: 100%;
-    margin-bottom: 20px;
-    float: left;
-  }
   .space__collab{
     height: 70px;
     width: 70px;
@@ -87,6 +103,7 @@
   margin-left: 10px;
   margin-top: 30px;
   width: 700px;
+  min-height: 100px;
   font-size: 13px;
   line-height: 18px;
   text-align: justify;
@@ -106,18 +123,36 @@
     font-family: Source Sans Pro;
   }
 
-/** Styling for the link button */
-.space__link{
-  font-family: Inconsolata;
-  font-size: 12px;
-  letter-spacing: 1px;
-  padding: 15px 15px 15px 45px;
-  box-shadow: 0px 1px 3px #CCC;
+/** Styling for the space buttons. */
+.space__buttonWrap{
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
   float: left;
-  cursor: pointer;
-  border-radius: 3px;
-  background: url(/static/img/link.svg) center left 10px no-repeat;
-  background-repeat: no-repeat;
-  background-size: 20px;
-  margin: 15px 10px;
 }
+  .space__button{
+    font-family: Inconsolata;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 15px 15px 15px 45px;
+    box-shadow: 0px 1px 3px #CCC;
+    float: left;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 0px 10px;
+  }
+    .space__button--link{
+      background: url(/static/img/link.svg) center left 10px no-repeat;
+      background-repeat: no-repeat;
+      background-size: 20px;
+    }
+    .space__button--edit{
+      background: url(/static/img/pencil.png) center left 10px no-repeat;
+      background-repeat: no-repeat;
+      background-size: 20px;
+    }
+    .space__button--delete{
+      background: url(/static/img/delete.png) center left 10px no-repeat;
+      background-repeat: no-repeat;
+      background-size: 20px;
+    }

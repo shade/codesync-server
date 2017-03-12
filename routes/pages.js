@@ -6,34 +6,15 @@
 var Routes = []
 
 
-var ROUTE_VIEW_PAIRS = {
-  '/home': 'user/home',
-  '/r/{repo?}': 'user/repo',
-  '/search': 'user/search',
-  '/profile': 'user/profile',
-  '/': 'home'
-}
 
 
 
+Routes.push({method: 'GET', path: '/home', handler: (req,rep) => (rep.view('user/home', {}))})
+Routes.push({method: 'GET', path: '/r/{repo?}', handler: (req,rep) => (rep.view('user/repo', {}))})
+Routes.push({method: 'GET', path: '/search', handler: (req,rep) => (rep.view('user/search', {}))})
+Routes.push({method: 'GET', path: '/profile', handler: (req,rep) => (rep.view('user/profile', {}))})
+Routes.push({method: 'GET', path: '/', handler: (req,rep) => (rep.view('home', {}))})
 
-for (var route in ROUTE_VIEW_PAIRS) {
-  var view = ROUTE_VIEW_PAIRS[route]
-
-  // push the normal route.
-  Routes.push({
-    method: 'GET',
-    path: route,
-    handler: (request, reply) => (reply.view(view, {}))
-  })
-
-  // push the iframe view.
-  Routes.push({
-    method: 'GET',
-    path: `/pages${route}`,
-    handler: (request, reply) => (reply.view(`pages${view}`, {}))
-  })
-}
 
 
 ///** Session routes. */
