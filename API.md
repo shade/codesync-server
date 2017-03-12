@@ -61,6 +61,23 @@ This is the documentation for the API. All API requests must be made to
 All these endpoints assume the user is logged in or a token must be provided.
 
 
+### GET /repos
+> ####Description
+> Grabs every repo object associated with the caller.
+>
+> ####GET params
+> _token_ - the token you get /auth
+>
+> ####Returns
+> ```json
+> {
+>   "repos": [
+>     {REPO_OBJECT}
+>   ]
+> }
+> ```
+
+
 
 
 ## WebSocket Endpoints

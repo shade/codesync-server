@@ -1,0 +1,23 @@
+
+/** Structure for the page. */
+#page__wrap{
+  max-width: 1000px;
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
+}
+  #side__wrap{
+    width: 150px;
+    float: left;
+    height: 100%;
+    border-right: 3px solid rgba(0,0,0,0.05);
+  }
+  #results__wrap{
+    float: right;
+    width: calc(100% - 155px);
+    min-height: 300px;
+  }
+    #results__wrap.loading{
+      background: url(/static/img/loader.gif) center center no-repeat;
+      background-size:50px;
+    }
