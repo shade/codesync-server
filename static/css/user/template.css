@@ -127,6 +127,7 @@ body{
   right: 0px;
   border-radius: 3px;
   padding: 10px;
+  display: none;
 }
   .notification__nub{
     height: 10px;
