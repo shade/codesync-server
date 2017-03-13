@@ -1,28 +1,13 @@
 html
   head
-    link(rel="stylesheet" href="/static/css/user/template.css")
-    link(rel="stylesheet" href="/static/css/user/notifications.css")
+    link(rel="stylesheet" href="/static/css/user2/template.css")
     block Head
   body
     div#navbar
-      div#loading__bar
       div#navbar__inner
-        a(href="/home")
-          div.navbar__logo Code
-            div.navbar__logo.navbar__logo--bold Synco
-        input.navbar__search(placeholder="Search for repos, peoples, and files..")
-        div.user__wrap
-          div.user__item.user__item--name Hi, Joe
-          div.user__item.user__item--img
-          div.user__item.user__item--notify
-        div.notification__box
-          div.notification__nub
-          div.notif__wrap
-            div.notif__header Accept or Decline?
-            div.notif__body jake_the_snake wants you to join his space, "The Codesync Server.."
-            div.notif__answerWrap
-              button.notif__answer.notif__answer--accept accept
-              button.notif__answer.notif__answer--decline decline
-            
-    iframe#main__frame
+        div#navbar__logo
+          span.navbar__bold Code
+          |Synco
+        div#navbar__user
+          div#navbar__userProf
     block Body
