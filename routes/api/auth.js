@@ -76,7 +76,7 @@ var signupRoute = (request, reply) => {
   //  
   // Minimum length: 4
   // Maximum length: 40
-  if (username.match(/([^A-Za-z0-9-]|-{2,})/g) || ul > 40 || ul < 4 || username[0] || username[ul-1] == '-') {
+  if (username.match(/([^A-Za-z0-9-]|-{2,})/g) || ul > 40 || ul < 4 || username[0] == '-' || username[ul-1] == '-') {
     reply({
       error: 'Bad Username'
     })
@@ -93,7 +93,7 @@ var signupRoute = (request, reply) => {
 
   // Make sure that both the username
   // and the email aren't registered in the database already.
-  DB.find({
+  Models.User.find({
     $or:[
       {email: email},
       {username: username}
@@ -113,6 +113,43 @@ var signupRoute = (request, reply) => {
       }
       return
     }
+
+
+    // Since we didn't find a match, we can create a user!
+    // Step 1: Hash the password.
+    Security.hash(password).then((hashedPass) => {
+      // Step 2: Create the mongoose object.
+      var user = new Models.User({
+        username: username,
+        password: hashedPass,
+        verified: false,
+        personal: {
+          name: '',
+          email: email
+        }
+      })
+
+      // Step 3: Email the user a verification. (Not Implemented Yet)
+      // Step 4: Save the user to the database.
+      user.save((err) => {
+        // Tell the there's an error, and quit
+        if (err) {
+          console.log(err)
+          reply({
+            error: 'Database Error!'
+          })
+          return
+        }
+
+        // Send a good signal to the user.
+        reply({
+          good: 'Yay, signup worked'
+        })
+      })
+    })
+
+
+
   })
 }
 

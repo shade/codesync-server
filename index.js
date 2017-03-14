@@ -57,9 +57,9 @@ Server.register([Vision,Inert], (err) => {
 
 
 // Connect to mongoDB and then start the server.
-mongoose.connect('mongodb://localhost:27017');
+Mongoose.connect('localhost:27017/codesync');
 
-global.db = mongoose.connection;
+global.db = Mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // Create a global models.
@@ -71,7 +71,7 @@ db.once('open', function() {
       throw err
     }
 
-    console.log('CodeSync API Running at: ', Server.info.uri);
+    console.log('CodeSync Server Running at: ', Server.info.uri);
   })
   // we're connected!
 });

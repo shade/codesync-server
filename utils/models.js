@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 // Create a schema for users.
 var UserSchema = mongoose.Schema({
-  _id: String,
   username: String,
   password: String,
+  verified: Boolean,
   personal: {
     name: String,
     email: String
@@ -17,7 +17,7 @@ var User = mongoose.model('User', UserSchema)
 // Create a schema for repos.
 var RepoSchema = mongoose.Schema({
   _id: String,
-  reponame: String
+  reponame: String,
   users: [String]
 })
 
