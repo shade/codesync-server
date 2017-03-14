@@ -3,6 +3,7 @@ const Inert = require('inert')
 const Vision = require('vision')
 const Jade = require('jade')
 const Hapi = require('hapi')
+const Mongoose = require('mongoose')
 
 // Start the server.
 const Server = new Hapi.Server()
@@ -13,9 +14,6 @@ Server.connection({
   host: 'localhost',
   port: 5000
 })
-
-// Declare some globals.
-global.DB = require('monk')('localhost:27017/codesync')
 
 // Declare constants.
 const ROUTES = [ 
@@ -58,11 +56,22 @@ Server.register([Vision,Inert], (err) => {
 });
 
 
-// Start the server.
-Server.start((err) => {
-  if (err) {
-    throw err
-  }
+// Connect to mongoDB and then start the server.
+mongoose.connect('mongodb://localhost:27017');
 
-  console.log('CodeSync API Running at: ', Server.info.uri);
-})
+global.db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // Create a global models.
+  global.Models = require('./utils/models')
+
+  // Start the server.
+  Server.start((err) => {
+    if (err) {
+      throw err
+    }
+
+    console.log('CodeSync API Running at: ', Server.info.uri);
+  })
+  // we're connected!
+});

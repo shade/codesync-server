@@ -16,9 +16,13 @@ body{
   border-bottom: 2px solid #FFF;
 }
   #navbar__inner{
-    width: 1000px;
+    max-width: 1000px;
+    width: 80%;
     margin: auto;
     height: 100%;
+    border-right: 2px solid #FFF;
+    border-left: 2px solid #FFF;
+    padding: 0 20px;
   }
     /** Navbar logo styling. */
     #navbar__logo{
@@ -43,9 +47,18 @@ body{
       line-height: 50px;
     }
       #navbar__userProf{
-        height: 25px;
-        width: 25px;
+        height: 20px;
+        width: 20px;
         background-color: #DDD;
         border-radius: 5px;
-        margin-top: 12.5px;
+        margin-top: 15px;
+        float: right;
+      }
+      #navbar__userName{
+        font-family: Montserrat;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        float: left;
+        margin-right: 10px;
       }
