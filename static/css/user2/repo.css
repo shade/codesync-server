@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+/** Styling for page structuring. */
+#main__wrap{
+  width: 80%;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 0px;
+  padding: 20px;
+  padding-top: 50px;
+  text-align: center;
+  border-top: 2px solid #f2f2f2;
+  background-color: #FFF;
+  height: calc(100% - 128px);
+}
+  
+  /** Styling for the page title. */
+  .repo__title{
+    font-family: Montserrat;
+    font-size: 35px;
+    font-weight: 200;
+    text-align: left;
+    padding: 15px;
+    box-sizing: border-box;
+    outline: 0;
+  }
+    .repo__bar{
+      height: 5px;
+      max-width: 600px;
+      width: 60%;
+      float: left;
+      border-radius: 20px;
+      background: url(/static/img/galaxy.jpg) -1300px -500px;
+    }
+  
+  /** Styling for the page collaborators */
+  .repo__collabWrap{
+    width: 80%;
+    float: left;
+    margin-top: 10px;
+    padding: 20px;
+  }
+    .collab__header{
+      width: 60%;
+      font-family: Quicksand;
+      float: left;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      float: left;
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 11px;
+    }
+      .collab__wrap{
+        width: 80%;
+        float: left;
+      }
+      .collab__container{
+        height: 60px;
+        width: 60px;
+        background-color: #EEE;
+        box-sizing: border-box;
+        border-radius: 100px;
+        float: left;
+        margin-left: 10px;
+      }
+    .collab__editbtn{
+      padding: 10px;
+      float: left;
+      font-family: Montserrat;
+      font-weight: 600;
+      font-size: 8px;
+      border: 0;
+      background-color: #F2f2f2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: 0;
+      margin-top: 10px;
+    }
+  /** Styling for the repo files */
+  .repo__fileWrap{
+    width: 80%;
+    float: left;
+    margin-top: 50px;
+  }
+    .file__header{
+      width: 60%;
+      font-family: Quicksand;
+      float: left;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      float: left;
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 11px;
+    }
+    .file__item{
+      width: 100%;
+      padding-left: 30px;
+      text-align: left;
+      font-family: Montserrat;
+      font-weight: 300;
+      font-size: 11px;
+      height: 30px;
+      float: left;
+      line-height: 30px;
+    }
+      .file__item--folder{
+        background: url(/static/img/folder.jpg) center left no-repeat;
+        background-size: 15px;
+      }
+      .file__item--file{
+        background: url(/static/img/file.png) center left no-repeat;
+        background-size: 15px;
+      }

@@ -1,35 +1,24 @@
 extends __template
 
 block Head
-  link(rel="stylesheet" href="/static/css/user/repo.css")
+  link(rel="stylesheet" href="/static/css/user2/repo.css")
 
 block Body
   #main__wrap
-    div.space__headerBar
-    div.space__titleWrap
-      div(contenteditable="true").space__title Unnamed Space
-    div.space__edit Last Edited, 17 mins ago
-    div.space__buttonWrap
-      div.space__button.space__button--link Link To Git Project
-      div.space__button.space__button--edit Edit Permissions
-      div.space__button.space__button--delete Delete Space
-    div.space__readmeWrap
-    strong.space__collabHeader Collaborators
-    input(placeholder="Enter Collaborators by Email or Username").space__collabInput
-    div.space__share OR...
-    div.space__share Share this link with friends! : #[strong#space__link codesync.com/s/293urji]
-    div.space__collabWrap
-      div.space__collab
-      div.space__collab
-      div.space__collab
-  script.
-    document.getElementById('space__link').addEventListener('click', function (e) {
-    SelectText(e.target)
-    })
-    function SelectText(text) {
-      var selection = window.getSelection();
-      var range = document.createRange();
-      range.selectNodeContents(text);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
+    div.repo__title(contenteditable="true" spellcheck="false") Codesync Server
+    div.repo__bar
+    div.repo__collabWrap
+      div.collab__header Collaborators
+        br
+        button.collab__editbtn.material Edit Permissions
+      div.collab__wrap
+        div.collab__container.material
+        div.collab__container.material
+        div.collab__container.material
+        div.collab__container.material
+    div.repo__fileWrap
+      div.file__header SPACE FILES
+      div.file__wrap
+        div.file__item.file__item--file this_is_a_file.png
+        div.file__item.file__item--folder THIS_IS_A_FOLDER
+          div.file__item.file__item--file this_is_a_file__inside.png

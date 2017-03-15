@@ -3,13 +3,15 @@
 /** Styling for page structuring. */
 #main__wrap{
   width: 80%;
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 0px;
   padding: 20px;
-  padding-top: 0;
-  box-sizing: border-box;
+  padding-top: 50px;
   text-align: center;
+  border-top: 2px solid #f2f2f2;
+  background-color: #FFF;
+  height: calc(100% - 128px);
 }
   .space__header{
     font-family: Montserrat;
@@ -29,6 +31,7 @@
       font-size: 11px;
       letter-spacing: 0.5px;
     }
+    
   /** Styling for the space card and its innards. */
   .space__card{
     height: 150px;
