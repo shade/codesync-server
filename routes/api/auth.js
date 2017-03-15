@@ -4,7 +4,6 @@ const Async = require('async')
 const Validator = require('email-validator');
 const Yar = require('yar')
 
-const DB = require('../../utils/db')
 const Security = require('../../utils/security')
 
 
@@ -15,33 +14,33 @@ const API_PREFIX = '/api/v1'
 
 
 // This handles all /auth token requests.
+// NOTE: ASYNC REQUIRES FULL FUNCTION NOTATION. ARROW FUNCTIONS WILL NOT WORK!
 var authRoute = (request, reply) => {
   // Grab the necessary params.
   var {username, password, ide_id} = request.payload
 
-  Async.series([
-    (cb) => {
-
-      // Get the user, if they don't exist, cast an error
-      DB.grabUser(username).then((user) => {
-        cb(null, user)
-      }, (err) => {
-        cb('User not found')
+  Async.waterfall([
+    function (cb) {
+      // Find the user using the model.
+      Models.User.findOne({username: username}, (error, result) => {
+        if (error || !result) {
+          cb('User not found')
+        } else {
+          cb(null, result)
+        }
       })
     },
-    (cb) => {
-
+    function (user, cb) {
       // Compare the password the user sent to the db one.
       Security.compare(password, user.password).then((valid) => {
         if (valid) {
-          cb(null, true)
+          cb(null, user)
         } else {
           cb('This is a bad password')
         }
       })
     }
-  ], (err, res) => {
-
+  ], function (err, user) {
     // If there was an error send it out. 
     // Else, send a token.
     if (err) {
@@ -50,7 +49,7 @@ var authRoute = (request, reply) => {
       })
     } else {
       reply({
-        token: Token.generate(res[0], TOKEN_EXPIRY_TIME),
+        token: Security.createUserToken(user, TOKEN_EXPIRY_TIME),
         expiry: TOKEN_EXPIRY_TIME + Date.now()
       })
     }
