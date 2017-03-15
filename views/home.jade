@@ -14,20 +14,23 @@ html
     div.center__wrap.center__wrap--input
       div.input__wrap#auth
         div.type__wrap
-          div.type__object(v-bind:class="{'type__object--active': login}" @click="login = !login") login
-          div.type__object(v-bind:class="{'type__object--active': !login}" @click="login = !login") signup
-        form(v-show="login")
-          input.cool__input(placeholder="Username or Email")
-          input.cool__input(placeholder="Password" type="password")
+          div.type__object(v-bind:class="{'type__object--active': login}" @click="toggleLogin()") login
+          div.type__object(v-bind:class="{'type__object--active': !login}" @click="toggleLogin()") signup
+        div.cool__message(v-bind:class="{'cool__message--error': errorMsg, 'cool__message--good': goodMsg}") {{goodMsg?goodMsg:errorMsg}}
+        form(v-show="login" @submit="login($event)")
+          input.cool__input(v-model="login.username" placeholder="Username or Email")
+          input.cool__input(v-model="login.password" placeholder="Password" type="password")
           div.cool__buttonWrap
             div.cool__button
             div.cool__label Remember Me
-          input.cool__input.cool__input--submit(value="Login" type="submit")
-        form(v-show="!login")
-          input.cool__input(placeholder="Username")
-          input.cool__input(placeholder="Password" type="password")
-          input.cool__input(placeholder="Email or Phone")
-          input.cool__input.cool__input--submit(value="Signup" type="submit")
+          button.cool__input.cool__input--submit(type="submit") {{(loading? '': 'Login')}}
+            div.cool__loading(v-show="loading")
+        form(v-show="!login" @submit="signup($event)")
+          input.cool__input(v-model="signup.username" placeholder="Username")
+          input.cool__input(v-model="signup.password" placeholder="Password" type="password")
+          input.cool__input(v-model="signup.email" placeholder="Email or Phone")
+          button.cool__input.cool__input--submit(type="submit") {{(loading? '': 'Signup')}}
+            div.cool__loading(v-show="loading")
 
   script(src="/static/js/write.js")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.min.js")

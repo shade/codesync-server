@@ -81,7 +81,25 @@
       cursor: pointer;
       height: 20px;
     }
-
+    .cool__loading{
+      width: 100%;
+      height: 30px;
+      background: url(/static/img/loader.gif) center center no-repeat;
+      background-size: 30px;
+    }
+    .cool__message{
+      padding: 5px;
+      font-family: Nunito;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #333;
+    }
+      .cool__message--error{
+        color: #D24D57;
+      }
+      .cool__message--good{
+        color: #00B16A;
+      }
 
 .type__wrap{
   font-family: Inconsolata;

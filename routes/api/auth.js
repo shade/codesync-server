@@ -19,6 +19,16 @@ var authRoute = (request, reply) => {
   // Grab the necessary params.
   var {username, password, ide_id} = request.payload
 
+  // Check to see if the request params are cool.
+  if (!username) {
+    reply({ error: "You didn't provide a username" })
+    return
+  }
+  if (!password) {
+    reply({ error: "You didn't provide a password" })
+    return
+  }
+
   Async.waterfall([
     function (cb) {
       // Find the user using the model.
@@ -65,8 +75,22 @@ var signupRoute = (request, reply) => {
     password,
     email
   } = request.payload
-  var ul = username.length
 
+  // Check if the request params are provided
+  if (!username) {
+    reply({ error: "You didn't provide a username" })
+    return
+  }
+  if (!password) {
+    reply({ error: "You didn't provide a password" })
+    return
+  }
+  if (!email) {
+    reply({ error: "You didn't provide a email" })
+    return
+  }
+
+  var ul = username.length
   username = username.toLowerCase()
   // Validate the username
   // 
@@ -162,17 +186,41 @@ var loginRoute = (request, reply) => {
     username_email,
     password
   } = request.payload
-
+  // Check if the request params are provided
+  if (!username_email) {
+    reply({ error: "You didn't provide a username or email" })
+    return
+  }
+  if (!password) {
+    reply({ error: "You didn't provide a password" })
+    return
+  }
   username_email = username_email.toLowerCase()
 
   // Check this username/email's existence in the database.
-  DB.find({
+  Models.User.findOne({
     $or: [
       {email: username_email},
       {username: username_email}
     ]
-  }, {}, (err, result) => {
+  }, {}, (err, user) => {
+    if (err || !user) {
+      reply({
+        error: 'User not found, (did you enter your username wrong?)'
+      })
+      return
+    }
 
+    // Compare the password the user sent to the db one.
+    Security.compare(password, user.password).then((valid) => {
+      if (valid) {
+        cb(null, user)
+      } else {
+        reply({
+          error: 'This is a bad password'
+        })
+      }
+    })
   })
 }
 
