@@ -13,6 +13,10 @@
   background-color: #FFF;
   height: calc(100% - 128px);
 }
+  #home__inner{
+    width: 80%;
+    margin: auto;
+  }
   .space__header{
     font-family: Montserrat;
     font-weight: 200;

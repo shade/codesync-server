@@ -1,14 +1,25 @@
 html
   head
     link(rel="stylesheet" href="/static/css/user2/template.css")
+    link(rel="stylesheet" href="/static/css/user/notifications.css")
     block Head
   body
     div#navbar
       div#navbar__inner
-        div#navbar__logo
-          span.navbar__bold Code
-          |Synco
+        a(href="/home")
+          div#navbar__logo
+            span.navbar__bold Code
+            |Synco
         div#navbar__user
-          div#navbar__userName Joe
           div#navbar__userProf
+          div#navbar__userName Joe
+          div#navbar__userNotif
+        div.notification__box
+          div.notification__nub
+          div.notif__wrap
+            div.notif__header Accept or Decline?
+            div.notif__body jake_the_snake wants you to join his space, "The Codesync Server.."
+            div.notif__answerWrap
+              button.notif__answer.notif__answer--accept accept
+              button.notif__answer.notif__answer--decline decline
     block Body

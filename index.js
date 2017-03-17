@@ -19,6 +19,7 @@ Server.connection({
 const ROUTES = [ 
   './routes/api/auth',
   './routes/api/data',
+  './routes/api/repo',
 ]
 
 

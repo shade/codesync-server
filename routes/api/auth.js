@@ -204,6 +204,7 @@ var loginRoute = (request, reply) => {
       {username: username_email}
     ]
   }, {}, (err, user) => {
+
     if (err || !user) {
       reply({
         error: 'User not found, (did you enter your username wrong?)'
@@ -214,7 +215,9 @@ var loginRoute = (request, reply) => {
     // Compare the password the user sent to the db one.
     Security.compare(password, user.password).then((valid) => {
       if (valid) {
-        cb(null, user)
+        reply({
+          good: `Hello ${user.username}!!!!`
+        })
       } else {
         reply({
           error: 'This is a bad password'

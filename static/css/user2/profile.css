@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+/** Styling for page structuring. */
+#main__wrap{
+  width: 80%;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 0px;
+  padding: 20px;
+  padding-top: 50px;
+  text-align: center;
+  border-top: 2px solid #f2f2f2;
+  background-color: #FFF;
+  height: calc(100% - 128px);
+}

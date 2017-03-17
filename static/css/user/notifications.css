@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=NTR');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600');
 /** Styling specific for the notifications inside the notification box. */
 .notif__wrap{
   width: 100%;

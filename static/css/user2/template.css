@@ -22,6 +22,7 @@ body{
     height: 100%;
     background-color: #FFF;
     padding: 0 20px;
+    position: relative;
   }
     /** Navbar logo styling. */
     #navbar__logo{
@@ -58,6 +59,47 @@ body{
         font-size: 11px;
         letter-spacing: 1px;
         text-transform: uppercase;
-        float: left;
+        float: right;
         margin-right: 10px;
       }
+      #navbar__userNotif{
+        background-color: #DDD;
+        float: right;
+        margin-right: 10px;
+        margin-top: 10px;
+        height: 30px;
+        width: 30px;
+        background: url(/static/img/notification.png) center center no-repeat;
+        background-size: 50%;
+        display: none;
+      }
+/** Styling for the notification box on the navigation bar. */
+.notification__box{
+  height: 250px;
+  width: 250px;
+  box-shadow: 0px 1px 1px #BBB;
+    border: 1px solid #EEE;
+  background-color: #FFF;
+  z-index: 1000;
+  float: right;
+  position: absolute;
+  right: 53px;
+  top: 52px;
+  border-radius: 3px;
+  padding: 10px;
+  display: none;
+}
+  .notification__nub{
+    height: 10px;
+    width: 20px;
+    position: absolute;
+    top: -10px;
+    right: 35px;
+    background-color: #FFF;
+    z-index: 100000;
+    border: 1px solid #DDD;
+    border-bottom: 0;
+    border-radius: 100px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; 
+  }
