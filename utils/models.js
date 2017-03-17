@@ -14,10 +14,17 @@ var UserSchema = mongoose.Schema({
 // Create the model from the user schema.
 var User = mongoose.model('User', UserSchema)
 
+// Create a schema for repoUsers
+var RepoUser = mongoose.model('RepoUser', mongoose.Schema({
+  username: String,
+  level: String
+}))
+
 // Create a schema for repos.
 var SpaceSchema = mongoose.Schema({
   name: String,
-  users: [String],
+  creator: String,
+  users: [RepoUser],
   created: Number
 })
 

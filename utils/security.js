@@ -43,6 +43,23 @@ function validToken (token) {
   return Crypto.createHmac('sha256', API_HMAC_KEY).update(raw).digest('base64') == hash
 }
 
+// Checks to see if this route is valid.
+// If it is, return the user.
+function verify (request, reply) {
+  var token = request.query.t
+
+  // If the token is bad, return false and tell the user.
+  if (!validToken(token)) {
+    reply({
+      error: "Invalid Token"
+    })
+    
+    return false
+  }
+
+  // Since this is a valid token, return the delimeter.
+  return token.split(TOKEN_DELIMETER)[0]
+}
 
 
 module.exports = {
@@ -50,5 +67,6 @@ module.exports = {
   compare: compare,
   tokenify: tokenify,
   createUserToken: createUserToken,
-  validToken: validToken
+  validToken: validToken,
+  verify: verify
 }
