@@ -117,8 +117,8 @@ function main () {
     port: 5001,
     host: 'localhost',
     verifyClient: (info) => {
-      console.log(Security.tokenify(info.req.url))
-      return true
+      var urlObj = Url.parse(info.req.url, true)
+      return Security.validToken(urlObj.query.t)
     }
   })
 

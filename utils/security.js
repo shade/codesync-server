@@ -35,7 +35,12 @@ function tokenify (data) {
 
 // Check to see if this token is valid
 function validToken (token) {
-  return Crypto.createHmac('sha256', API_HMAC_KEY).update(data).digest('base64')
+  // Split the token.
+  var hash
+  var raw
+  [raw, hash] = token.split(TOKEN_DELIMETER)
+
+  return Crypto.createHmac('sha256', API_HMAC_KEY).update(raw).digest('base64') == hash
 }
 
 
@@ -44,5 +49,6 @@ module.exports = {
   hash: hash,
   compare: compare,
   tokenify: tokenify,
-  createUserToken: createUserToken
+  createUserToken: createUserToken,
+  validToken: validToken
 }
