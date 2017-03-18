@@ -12,6 +12,7 @@
   border-top: 2px solid #f2f2f2;
   background-color: #FFF;
   height: calc(100% - 128px);
+  position: relative;
 }
   
   /** Styling for the page title. */
