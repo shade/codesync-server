@@ -49,9 +49,8 @@ Funcs.validToken = (token) => {
 // If it is, return the user.
 Funcs.verify = (request, reply) => {
   var token = request.query.t
-
   // If the token is bad, return false and tell the user.
-  if (!Funcs.validToken(token)) {
+  if (!token || !Funcs.validToken(token)) {
     reply({
       error: "Invalid Token"
     })

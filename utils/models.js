@@ -7,6 +7,7 @@ var UserSchema = mongoose.Schema({
   verified: Boolean,
   personal: {
     name: String,
+    gender: String,
     email: String
   }
 })

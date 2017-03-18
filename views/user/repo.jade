@@ -2,24 +2,49 @@ extends __template
 
 block Head
   link(rel="stylesheet" href="/static/css/user2/repo.css")
-
+  style.
+    #name__input{
+      font-family: Quicksand;
+      font-size: 30px;
+      font-weight: 100;
+      color: #000;
+      border: 0;
+      width: calc(100% - 100px);
+      padding: 20px;
+      margin: 50px;
+      margin-top: 0;
+      box-sizing: border-box;
+      outline: 0;
+      letter-spacing: 0.75;
+      border-bottom: 3px solid #f9f9f9;
+    }
+    .cool__header{
+      width: 100%;
+      text-align: left;
+      font-family: Quicksand;
+      font-size: 10px;
+      color: #999;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-top: 50px;
+      margin-left: 70px;
+    }
 block Body
   #main__wrap
-    div.repo__title(contenteditable="true" spellcheck="false") Codesync Server
-    div.repo__bar
-    div.repo__collabWrap
-      div.collab__header Collaborators
-        br
-        button.collab__editbtn.material Edit Permissions
-        button.collab__editbtn.material.collab__addbtn ADD +
-      div.collab__wrap
-        div.collab__container.material
-        div.collab__container.material
-        div.collab__container.material
-        div.collab__container.material
-    div.repo__fileWrap
-      div.file__header SPACE FILES
-      div.file__wrap
-        div.file__item.file__item--file this_is_a_file.png
-        div.file__item.file__item--folder THIS_IS_A_FOLDER
-          div.file__item.file__item--file this_is_a_file__inside.png
+    input#name__input(placeholder="Give your space a great name" spellcheck="false" v-model="name" @keyup="verifyInput" maxlength="40")
+
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js")
+  script.
+    var MajorInput = new Vue({
+      el: '#name__input',
+      data: {
+        name: ""
+      },
+      methods: {
+        verifyInput: function () {
+        console.log(this.name)
+          this.name = this.name.replace(/[^A-Za-z0-9\-]/g, '').replace(/ /g, '-')
+        }
+      }
+    })

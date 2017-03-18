@@ -23,14 +23,16 @@
     padding: 15px;
     box-sizing: border-box;
     outline: 0;
+    width: 100%;
+    border: 0;
   }
     .repo__bar{
       height: 5px;
-      max-width: 600px;
-      width: 60%;
+      width: 100%;
       float: left;
       border-radius: 20px;
       background: url(/static/img/galaxy.jpg) -1300px -500px;
+      margin-bottom: 50px;
     }
   
   /** Styling for the page collaborators */

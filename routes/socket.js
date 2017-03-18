@@ -7,8 +7,10 @@ const TERMINATE_INTERVAL_LENGTH = 60000
 const WEBSOCKET_DELIMETER = ':|:'
 
 // The appropriate maps needed for aggregation.
-var SpaceMap = {}
-var UserMap = {}
+global.Socket = {}
+
+var SpaceMap = global.Socket.SpaceMap = {}
+var UserMap = global.Socket.UserMap = {}
 
 // The Events route, object.
 var Events = {}
@@ -53,6 +55,7 @@ Events.list = (data, socket) => {
       */
       // Create the space.
       SpaceMap[spaceName] = {
+        id: spaceName,
         activeUsers: {},
         data: response
       }
@@ -109,7 +112,7 @@ function emitData  (socket, event, data) {
 }
 
 // Kills the user from all the spaces. Notifies the people in the space that he's gone.
-function removeUser (socket) {
+function killUser (socket) {
   var id = socket.id
 
   // Iterate through all the spaces, and remove you from active users.
@@ -117,7 +120,15 @@ function removeUser (socket) {
     // Get rid of you.
     delete space.activeUsers[id]
     // Go through the users and notify them.
-    
+    var users = space.activeUsers
+    for (var used_id in users) {
+      var user = users[used_id]
+      // Notify the death to the user.
+      emitData(user.socket, 'died', {
+        user: user.id,
+        space: space.id
+      })
+    }
   })
 }
 
@@ -163,6 +174,11 @@ function main () {
       // Execute the Events.
       Events[event] && Events[event](msgArr[1], socket)
     })
+
+    socket.on('close', () => {
+      killUser(socket)
+    })
+
   })
 }
 

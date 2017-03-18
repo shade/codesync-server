@@ -89,38 +89,40 @@ Additionally, all WebSocket requests must be accompanied by a valid token in the
 
 ### Events To Server >
 
-#### 'send'
-> Description
+#### send
+> **Description**
 > This event sends data to the person specified.
 >
-> JSON Params
+> **JSON Params**
 > _to_ - the id of the person you're sending data to.
 >
 > _data_ - some sort of data you want to send them.
 >
-### 'list'
-> Description
+### list
+> **Description**
 > This gets the list of all the users in the space.
 >
-> JSON Params
+> **JSON Params**
 > _space_ - the id of the space you want the list of.
 >
+
 ### Events From Server <
 
-#### 'died'
-> Description
+#### died
+> **Description**
 > This event is sent when someone's WebSocket connection dies. Make sure you kill the RTC connection too.
 >
-> JSON Params
+> **JSON Params**
 > _user_ - the id of the person that disconnected.
 >
 > _space_ - the id of the space this person is disconnecting from.
 >
-#### 'msg'
-> Description
+
+#### msg
+> **Description**
 > This event is sent when someone wants to send you some data.
 >
-> JSON Params
+> **JSON Params**
 > _from_ - the id of the person sending you the data.
 >
 > _data_ - the data being sent to you, verbatim.
