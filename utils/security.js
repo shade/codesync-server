@@ -9,47 +9,49 @@ const SALT_ROUNDS = 10
 const API_HMAC_KEY = 'wv1eDxOG28T2e16QdaDpJoe is the best programmer ever.sYqgi9e4ZCClc7K1cxT6'
 const TOKEN_DELIMETER = '^_^'
 
+var Funcs = {}
 
 // Function for handling hashing, returns a promise.
-function hash (password) {
+Funcs.hash = (password) => {
   return Bcrypt.hash(password, SALT_ROUNDS)
 }
 
 // Function for comparing a DB hashed password to another one. Returns a promise, true or false.
-function compare (plainPass, hashPass) {
+Funcs.compare = (plainPass, hashPass) => {
   return Bcrypt.compare(plainPass, hashPass)
 }
 
 // Function creates a token for users from the user object.
-function createUserToken (user, expire) {
+Funcs.createUserToken = (user, expire) => {
   var token = user.username
   token += TOKEN_DELIMETER
-  token += tokenify(user.username)
+  token += Funcs.tokenify(user.username)
   return token
 }
 
 // Function to create a token from some information.
-function tokenify (data) {
+Funcs.tokenify = (data) => {
   return Crypto.createHmac('sha256', API_HMAC_KEY).update(data).digest('base64')
 }
 
 // Check to see if this token is valid
-function validToken (token) {
+Funcs.validToken = (token) => {
   // Split the token.
   var hash
   var raw
   [raw, hash] = token.split(TOKEN_DELIMETER)
-
-  return Crypto.createHmac('sha256', API_HMAC_KEY).update(raw).digest('base64') == hash
+  
+  // Hash should not contain any spaces. Spaces should be pluses.
+  return Crypto.createHmac('sha256', API_HMAC_KEY).update(raw).digest('base64') == hash.replace(/ /g,'+')
 }
 
 // Checks to see if this route is valid.
 // If it is, return the user.
-function verify (request, reply) {
+Funcs.verify = (request, reply) => {
   var token = request.query.t
 
   // If the token is bad, return false and tell the user.
-  if (!validToken(token)) {
+  if (!Funcs.validToken(token)) {
     reply({
       error: "Invalid Token"
     })
@@ -62,11 +64,4 @@ function verify (request, reply) {
 }
 
 
-module.exports = {
-  hash: hash,
-  compare: compare,
-  tokenify: tokenify,
-  createUserToken: createUserToken,
-  validToken: validToken,
-  verify: verify
-}
+module.exports = Funcs

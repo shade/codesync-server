@@ -1,4 +1,3 @@
-const Redis = require('redis')
 const Url = require('url')
 const WebSocket = require('ws')
 const Security = require('../utils/security')
@@ -7,93 +6,96 @@ const Security = require('../utils/security')
 const TERMINATE_INTERVAL_LENGTH = 60000
 const WEBSOCKET_DELIMETER = ':|:'
 
-global.SocketServer = null
-global.RedisClient = Redis.createClient()
+// The appropriate maps needed for aggregation.
+var SpaceMap = {}
+var UserMap = {}
 
-
-// Object to hold all the events.
-var Users = {}
+// The Events route, object.
 var Events = {}
 
-
-/**
- * Accepts a repo ID and sends back a list of people in the repo, if legit repo
- * @param  {JSON} data   {
- *                         repo: 'REPO_ID'
- *                       }
- *
- * @return {Array<USER_ID>} data[]
- */
+// HANDLE LIST EVENTS
 Events.list = (data, socket) => {
-
-  // Make sure this is valid JSON, or fail.
+  // Try parsing the JSON. Fail if otherwise.
   try {
-    var {repo} = JSON.parse(data)
+    var json  = JSON.parse(data)
+    var spaceName = json.space
   } catch (e) {
-    logError(socket, 'bad JSON')
+    logError(socket, 'INVALID JSON SENT!')
     return
   }
-  var you_id = socket.id
 
-  // Grab the userlist.
-  RedisClient.lrange(`${repo}list`,0,-1, (err, result) => {
-      if (err) logError(socket, 'redis DB error..')
+  // Tell the user there's a bad space name, if none is supplied.
+  if (!spaceName) {
+    logError(socket, 'BAD SPACE NAME!')
+    return
+  }
 
+  // Check for the existence of the space in the map, otherwise, quit.
+  var space = SpaceMap[spaceName]
 
-      // Make sure you're already not part of the user list, or die.
-      for (var i = 0, ii = result.length; i < ii; i++) {
-        if (you_id == result[i]) {
-          logError(socket, 'You\'re already on list')
-          return
-        }
+  // Handle the space not existing.
+  if (!space) {
+    Models.Space.find({
+      name: spaceName
+    }, (err, response) => {
+
+      // Check for error cases.
+      if (err) {
+        logError(socket, "DATABASE ERROR!")
+        return
       }
-      // Send the user list to you.
-      emitData(socket,'list',result)
-      // Add you to the userlist.
-      RedisClient.rpush(`${repo}list`,`${you_id}`, () => {})
+      /*
+      UNCOMMENT WHEN WE'RE READY.
+      if (!response) {
+        logError(socket, "SPACE DOESN'T EXIST!")
+        return
+      }
+      */
+      // Create the space.
+      SpaceMap[spaceName] = {
+        activeUsers: {},
+        data: response
+      }
+      
+      // Add you to the active users.
+      SpaceMap[spaceName].activeUsers[socket.id] = UserMap[socket.id]
+      // Add the space to you.
+      UserMap[socket.id].spaces.push(SpaceMap[spaceName])
+      // Emit an empty list for consistency.
+      emitData(socket, 'list', [])
+    })
 
-  }) 
+  // Handle when the space already exists.
+  } else {
+    // If you're part of the space, loudly exit.
+    if (SpaceMap[spaceName].activeUsers[socket.id]) {
+      logError(socket, "YOU'RE ALREADY PART OF THE SPACE")
+      return
+    }
 
+    // Grab the current set of people.
+    var _people = Object.keys(SpaceMap[spaceName].activeUsers)
+    // Add you to the people.
+    SpaceMap[spaceName].activeUsers[socket.id] = UserMap[socket.id]
+    // Add the space to you.
+    UserMap[socket.id].spaces.push(SpaceMap[spaceName])
+    // Send you the list of people.
+    emitData(socket, 'list', _people)
+  }
 }
 
 
-/**
- * Accepts some data and sends it to the person.
- * With the current socket data.
- * 
- * @param  {JSON} data {
- *                       to: 'USER_ID',
- *                       data: 'String data'
- *                     }
- *
- * @return {JSON} data {
- *                       from: 'USER_ID',
- *                       data: 'String data'
- *                     }
- */
-Events.send = (data, socket) => {
 
-  // Make sure this is valid JSON, or fail.
-  try {
-    var {to, data} = JSON.parse(data)
-  } catch (e) {
-    logError(socket, 'bad JSON')
-    return
-  }
 
-  // Find the reciever or fail.
-  var toSocket = Users[to]
-  if (!toSocket) {
-    logError(socket, 'bad User')
-    return
-  }
 
-  // Send to the socket, with data and sender.
-  emitData(toSocket, 'data', JSON.stringify({
-    from: socket.id,
-    data: data
-  }))
-}
+
+
+
+
+
+
+
+
 
 
 
@@ -101,11 +103,23 @@ Events.send = (data, socket) => {
 function logError (socket, msg) {
   socket.send('error' + WEBSOCKET_DELIMETER + msg)
 }
+
 function emitData  (socket, event, data) {
   socket.send(event + WEBSOCKET_DELIMETER + JSON.stringify(data))
 }
 
+// Kills the user from all the spaces. Notifies the people in the space that he's gone.
+function removeUser (socket) {
+  var id = socket.id
 
+  // Iterate through all the spaces, and remove you from active users.
+  UserMap[id].spaces.forEach(space  => {
+    // Get rid of you.
+    delete space.activeUsers[id]
+    // Go through the users and notify them.
+    
+  })
+}
 
 
 
@@ -118,15 +132,23 @@ function main () {
     host: 'localhost',
     verifyClient: (info) => {
       var urlObj = Url.parse(info.req.url, true)
+      // Check if it's a valid token.
       return Security.validToken(urlObj.query.t)
     }
   })
 
   // Set the server events.
   SocketServer.on('connection', socket => {
+    // Grab the username, from the previous the thing.
+    var username = Url.parse(socket.upgradeReq.url, true).query.t.split('^_^')[0]
+
     // Add the socket to the users list.
-    Users[Security.tokenify(socket.upgradeReq.url)] = socket
-    socket.id = Security.tokenify(socket.upgradeReq.url)
+    UserMap[username] = {
+      active: true,
+      socket: socket,
+      spaces: []
+    }
+    socket.id = username
     
     // Do stuff on the messages.
     socket.on('message', (data, flags) => {
@@ -148,3 +170,5 @@ function main () {
 module.exports = {
   start: main
 }
+
+

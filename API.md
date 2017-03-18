@@ -87,22 +87,41 @@ Where data is a JSON stringified message. The Delimeter can be found as a consta
 
 Additionally, all WebSocket requests must be accompanied by a valid token in the token GET parameter.
 
-### 'send'
-> #### Description
-> This event sends data to the the 
-> #### JSON Params
+### Events To Server >
+
+#### 'send'
+> Description
+> This event sends data to the person specified.
+>
+> JSON Params
 > _to_ - the id of the person you're sending data to.
 >
 > _data_ - some sort of data you want to send them.
 >
-> #### Callback Events
-> none.
-
 ### 'list'
-> #### Description
-> This gets the list of all the users in the repo.
-> #### JSON Params
-> _repo_ - the id of the repository you want the list of.
+> Description
+> This gets the list of all the users in the space.
 >
-> #### Callback Events
-> none.
+> JSON Params
+> _space_ - the id of the space you want the list of.
+>
+### Events From Server <
+
+#### 'died'
+> Description
+> This event is sent when someone's WebSocket connection dies. Make sure you kill the RTC connection too.
+>
+> JSON Params
+> _user_ - the id of the person that disconnected.
+>
+> _space_ - the id of the space this person is disconnecting from.
+>
+#### 'msg'
+> Description
+> This event is sent when someone wants to send you some data.
+>
+> JSON Params
+> _from_ - the id of the person sending you the data.
+>
+> _data_ - the data being sent to you, verbatim.
+>
