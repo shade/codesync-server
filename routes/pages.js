@@ -11,6 +11,7 @@ var Routes = []
 
 Routes.push({method: 'GET', path: '/home', handler: (req,rep) => (rep.view('user/home', {}))})
 Routes.push({method: 'GET', path: '/r/{repo?}', handler: (req,rep) => (rep.view('user/repo', {}))})
+Routes.push({method: 'GET', path: '/re', handler: (req,rep) => (rep.view('user/repo_n', {}))})
 Routes.push({method: 'GET', path: '/search', handler: (req,rep) => (rep.view('user/search', {}))})
 Routes.push({method: 'GET', path: '/profile', handler: (req,rep) => (rep.view('user/profile', {}))})
 Routes.push({method: 'GET', path: '/', handler: (req,rep) => (rep.view('home', {}))})
