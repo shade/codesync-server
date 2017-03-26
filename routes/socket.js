@@ -90,6 +90,7 @@ Events.list = (data, socket) => {
 
 // SEND EVENTS
 Events.send = (data, socket) => {
+  console.log(data)
   // Try parsing the JSON.
   // Fail otherwise.
   try {
@@ -107,7 +108,7 @@ Events.send = (data, socket) => {
     return
   }
 
-  emitData('msg', {
+  emitData(user.socket, 'msg', {
     from: socket.id,
     data: json.data
   })
