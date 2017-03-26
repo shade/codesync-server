@@ -88,8 +88,30 @@ Events.list = (data, socket) => {
 }
 
 
+// SEND EVENTS
+Events.send = (data, socket) => {
+  // Try parsing the JSON.
+  // Fail otherwise.
+  try {
+    var json = JSON.parse(data)
+  } catch(e) {
+    logError(socket, 'INVALID JSON SENT!')
+    return
+  }
 
+  // Grab the user from the map.
+  var user = UserMap[json.to]
+  // Yell at the socket if doesn't exist
+  if (!user) {
+    logError(socket, `User ${json.to} DOES NOT EXIST.`)
+    return
+  }
 
+  emitData('msg', {
+    from: socket.id,
+    data: json.data
+  })
+}
 
 
 
@@ -115,6 +137,8 @@ function emitData  (socket, event, data) {
 function killUser (socket) {
   var id = socket.id
 
+  // Kill your heartbeat.
+  clearInterval(UserMap[id].heartbeat)
   // Iterate through all the spaces, and remove you from active users.
   UserMap[id].spaces.forEach(space  => {
     // Get rid of you.
@@ -157,7 +181,10 @@ function main () {
     UserMap[username] = {
       active: true,
       socket: socket,
-      spaces: []
+      spaces: [],
+      heartbeat: setInterval(() => {
+        emitData(socket, 'hb', ~~(Math.random() * 10) + 1)
+      }, 5000)
     }
     socket.id = username
     
